@@ -1,6 +1,6 @@
 {
   "name": "runkit",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Node.js powered scripting runtime kit",
   "main": "engine.js",
   "scripts": {
