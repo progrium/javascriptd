@@ -1,0 +1,25 @@
+{
+  "name": "runkit",
+  "version": "1.0.0",
+  "description": "Node.js powered scripting runtime kit",
+  "main": "engine.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/progrium/runkit.git"
+  },
+  "author": "Jeff Lindsay <progrium@gmail.com> (http://progrium.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/progrium/runkit/issues"
+  },
+  "homepage": "https://github.com/progrium/runkit#readme",
+  "bin": {
+   "runkit-engine": "./engine.js"
+  },
+  "dependencies": {
+    "nodejs-websocket": "*"
+  }
+}
