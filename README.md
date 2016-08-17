@@ -17,11 +17,13 @@ available.
 
 ## Using outside of Docker
 
-The only reason Javascriptd is packaged and published on NPM is so you can use it
-in development without Docker.
+You can use Javascriptd in development without Docker. Just link and run the
+binary. It should not be published to NPM.
 
 ```
-$ npm install javascriptd
+$ npm link
+... elsewhere ...
+$ javascriptd
 ```
 
 Keep in mind it will have all your global packages available.
