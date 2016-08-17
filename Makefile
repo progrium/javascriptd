@@ -1,14 +1,17 @@
 .PHONY: dev build push
 
 dev: build
-	@docker rm -f runkit-dev || true
-	docker run -it --name runkit-dev --publish 8000:8000 progrium/runkit
+	@docker rm -f javascriptd-dev || true
+	docker run -it --name javascriptd-dev --publish 8000:8000 progrium/javascriptd
+
+test:
+	npm test
 
 build:
-	docker build -t progrium/runkit .
+	docker build -t progrium/javascriptd .
 
 push: build
-	docker push progrium/runkit
+	docker push progrium/javascriptd
 
 publish:
 	npm publish

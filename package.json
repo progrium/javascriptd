@@ -1,25 +1,29 @@
 {
-  "name": "runkit",
+  "name": "javascriptd",
   "version": "0.1.0",
-  "description": "Node.js powered scripting runtime kit",
-  "main": "engine.js",
+  "description": "Node.js powered script execution daemon",
+  "main": "daemon.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha *_test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/progrium/runkit.git"
+    "url": "git+https://github.com/progrium/javascriptd.git"
   },
   "author": "Jeff Lindsay <progrium@gmail.com> (http://progrium.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/progrium/runkit/issues"
+    "url": "https://github.com/progrium/javascriptd/issues"
   },
-  "homepage": "https://github.com/progrium/runkit#readme",
+  "homepage": "https://github.com/progrium/javascriptd#readme",
   "bin": {
-   "runkit-engine": "./engine.js"
+    "javascriptd": "./daemon.js"
   },
   "dependencies": {
+    "console-stamp": "^0.2.2",
     "nodejs-websocket": "*"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2"
   }
 }
