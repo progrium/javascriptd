@@ -7,7 +7,7 @@ var util = require('util');
 var ws = require("nodejs-websocket");
 var {duplex} = require("./duplex.js");
 
-var port = process.env["PORT"] || "8000";
+var port = process.env["PORT"] || "8765";
 var timeout = process.env["TIMEOUT"] || "3000";
 var secret = process.env["SECRET"];
 

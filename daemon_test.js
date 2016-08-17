@@ -2,7 +2,8 @@ var assert = require('assert');
 var ws = require("nodejs-websocket");
 var {duplex} = require("./duplex.js");
 
-process.env["NOLOGS"] = "true";
+process.env["NOLOGS"] = process.env["NOLOGS"] || "true";
+process.env["PORT"] = process.env["PORT"] || "8765";
 require("./daemon.js");
 
 const errNotImplemented = {code: 1001, message: "Not implemented"};

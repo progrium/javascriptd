@@ -9,7 +9,7 @@ packages available. This is usually undesirable. So make a runtime image:
 
 ```
 FROM progrium/javascriptd
-RUN npm install -g github circlci bluebird
+RUN npm install -g github circleci bluebird
 ```
 
 Now running your Javascriptd runtime image, scripts will have these packages
@@ -31,10 +31,24 @@ Keep in mind it will have all your global packages available.
 To keep Javascriptd private, set environment variable `SECRET` and run it behind
 SSL. HTTP requests will then require the header `x-runtime-secret`.
 
+In terms of sandboxing, there are two layers of isolation builtin.
+
+First, each script call is done in a separate V8 context via
+Node's [vm](https://nodejs.org/api/vm.html) module. "Breaking out" requires access
+to various modules, which can be imported by `require`. Normally `require` is not
+available, but we add it since there is little useful JavaScript that can be
+written in an empty context. This [should be secured](https://github.com/progrium/javascriptd/issues/2)
+by whitelisting safe Node modules and NPM packages.
+
+Second, Javascriptd is made to be run inside Docker by a non-root user. This,
+combined with extra isolation levels that can be configured via Docker, provides
+pretty solid isolation guarantees. Further isolation could be added around Docker
+and in the environment Docker is run as needed.
+
 ## Running scripts
 
 The Javascriptd daemon exposes a [Duplex](https://github.com/progrium/duplex) JSON-over-WebSocket endpoint.
-It has one method: `runtime.execute`.
+It has one method:
 
 ### runtime.execute(script) => results
 
