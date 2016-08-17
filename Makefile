@@ -12,6 +12,3 @@ build:
 
 push: build
 	docker push progrium/javascriptd
-
-publish:
-	npm publish
