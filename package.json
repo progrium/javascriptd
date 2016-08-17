@@ -20,7 +20,6 @@
     "javascriptd": "./daemon.js"
   },
   "dependencies": {
-    "console-stamp": "^0.2.2",
     "nodejs-websocket": "*"
   },
   "devDependencies": {
