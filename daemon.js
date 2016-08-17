@@ -22,14 +22,14 @@ var rpc = new duplex.RPC(duplex.JSON);
 
 rpc.register("runtime.execute", function(ch) {
   ch.onrecv = function(err, script) {
-    var timeout;
+    var timeoutHandle;
+    const logs = [];
     const hash = crypto
       .createHash('md5')
       .update(script.code)
       .digest("hex");
     try {
       const sandbox = (script.globals || {});
-      const logs = [];
       const defaultCaller = (callee, cb) => callee(cb);
 
       sandbox._script = script.code;
@@ -43,13 +43,14 @@ rpc.register("runtime.execute", function(ch) {
       }
 
       var startTime = Date.now();
-      var timeoutHandle = setTimeout(function() {
+      timeoutHandle = setTimeout(function() {
         log(hash, script.call, "Timeout");
         ch.senderr(1002, "Timeout")
       }, 3000);
       vm.createContext(sandbox);
       vm.runInContext(script.code, sandbox, {timeout: timeout});
       if (sandbox[script.call] === undefined) {
+        clearTimeout(timeoutHandle);
         ch.senderr(1001, "Not implemented")
         return
       }
@@ -67,8 +68,8 @@ rpc.register("runtime.execute", function(ch) {
       } else {
         name = e.name;
       }
-      if (timeout !== undefined) {
-        clearTimeout(timeout);
+      if (timeoutHandle !== undefined) {
+        clearTimeout(timeoutHandle);
       }
       log(hash, script.call, name);
       ch.senderr(1000, name, {stack: e.stack, console: logs});
